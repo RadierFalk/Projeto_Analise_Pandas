@@ -7,6 +7,7 @@ import seaborn as sns
 import matplotlib
 import matplotlib.pyplot as plt 
 
+%matplotlib inline
 
 #Carregando o conjunto de dados em um quadro de dados usando Pandas
 #@title
@@ -43,4 +44,21 @@ df.Month = pd.to_datetime(df.Month.str.upper(), format='%b%y', yearfirst=False)
 #indexing month
 df = df.set_index('Month')
 
-display(df.head())
+sns.set_style('darkgrid')
+matplotlib.rcParams['font.size'] = 14
+matplotlib.rcParams['figure.figsize'] = (9, 5)
+matplotlib.rcParams['figure.facecolor'] = '#00000000'
+
+#raw-materials list
+raw_data=['Coarse wool Price',  'Copra Price','Cotton Price', 'Fine wool Price',  'Hard log Price', 'Hard sawnwood Price',
+ 'Hide Price', 'Plywood Price', 'Rubber Price', 'Softlog Price', 'Soft sawnwood Price', 'Wood pulp Price']
+#getting the correlation matrix
+corrmat = df[raw_data].corr()
+#setting the size of plot
+fig = plt.figure(figsize = (12, 9))
+#masking the upper traingle part since matrix is symmetric(repetitive) 
+mask = np.triu(np.ones_like(corrmat, dtype=bool))
+sns.heatmap(corrmat, vmax = .8,mask=mask, square = True, annot = True)
+plt.show()
+
+#display(df.head())
