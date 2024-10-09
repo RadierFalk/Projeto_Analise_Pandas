@@ -3,6 +3,10 @@
 import pandas as pd 
 import numpy as np
 from IPython.display import display
+import seaborn as sns
+import matplotlib
+import matplotlib.pyplot as plt 
+
 
 #Carregando o conjunto de dados em um quadro de dados usando Pandas
 #@title
